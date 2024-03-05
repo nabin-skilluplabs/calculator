@@ -1,16 +1,25 @@
 (() => {
    let screenValue = "";
+   let isCalculatedValue = false;
+
    function getButtonValue(event) {
       const screenElement = document.querySelector('input');
+
       const digit = event.target.textContent;
 
       if(digit === "=") {
          const calculatedValue = eval(screenValue);
          screenElement.value = calculatedValue;
+         screenValue = calculatedValue;
+         isCalculatedValue = true;
       }
-      else {
-         
-         screenValue = screenValue + digit;
+      else {  
+         if(!isCalculatedValue) {
+            screenValue = screenValue + digit;
+         }
+         else {
+            screenValue = digit;
+         }
          screenElement.value = screenValue;
       }
    }
